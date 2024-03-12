@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 from urllib.parse import urljoin
-FILENAME="jobs.txt"
+FILENAME="data/jobs.txt"
 
 def search_job_posts(url, job_title):
     response = requests.get(url)
