@@ -16,7 +16,7 @@ class webpage():
   @app.route("/blog")
   def blog():
     return render_template("blog.html")
-  @app.route("/launchapp")
+  @app.route("/launchapp",methods=['POST','GET'])
   def launchapp():
     randnum = random.randint(1, 5)
     if request.method == "POST":

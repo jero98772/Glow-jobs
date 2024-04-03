@@ -1,11 +1,13 @@
 {% extends  'template.html'%}
 {% block content %} 
+<form method="post">
     <div class="container">
-        <img src="profile_image.jpg" alt="Profile Image">
+        <img src="https://raw.githubusercontent.com/jero98772/Glow-jobs/main/data/images/jobspostings/{{ randnum }}.jpg" alt="Profile Image">
         <div class="button-group">
         	<input type="submit" name="submit_button" value="accept">
 			<input type="submit" name="submit_button" value="reject">
 
         </div>
     </div>
+</form>
 {% endblock  %}
