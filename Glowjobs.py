@@ -2,7 +2,10 @@
 # -*- coding: utf-8 -*- 
 #Glowjobs - by Glowjobs
 from flask import Flask, render_template, request, flash, redirect ,session
+import random
+
 app = Flask(__name__)
+
 class webpage():
   @app.route("/")
   def index():
@@ -15,7 +18,13 @@ class webpage():
     return render_template("blog.html")
   @app.route("/launchapp")
   def launchapp():
-    return render_template("launchapp.html")
+    randnum = random.randint(1, 5)
+    if request.method == "POST":
+      if request.form['submit_button'] == 'accept':
+            pass 
+      elif request.form['submit_button'] == 'reject':
+            pass 
+    return render_template("launchapp.html", randnum=randnum)
   @app.route("/conctact")
   def conctact():
     return render_template("conctact.html")
