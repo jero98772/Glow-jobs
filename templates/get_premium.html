@@ -1,0 +1,11 @@
+{% extends  'template.html'%}
+{% block content %} 
+       <div class="container">
+        <h2>Premium Subscription</h2>
+        <form action="process_subscription.php" method="post">
+            <label for="email">Enter your email to subscribe to our premium service:</label>
+            <input type="email" id="email" name="email" required>
+            <input type="submit" value="Subscribe">
+        </form>
+    </div>
+{% endblock  %}
