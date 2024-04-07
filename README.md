@@ -4,6 +4,12 @@
 
 This Python script is designed to search for job posts on a given website, analyze the content of each post, and save relevant information to a CSV file.
 
+## Media:
+
+![](https://github.com/jero98772/Glow-jobs/blob/main/media/0.png)
+![](https://github.com/jero98772/Glow-jobs/blob/main/media/1.png)
+![](https://github.com/jero98772/Glow-jobs/blob/main/media/2.png)
+
 ## Requirements
 
 - Python 3.x
