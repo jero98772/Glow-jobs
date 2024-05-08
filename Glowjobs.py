@@ -3,10 +3,12 @@
 #Glowjobs - by Glowjobs
 from flask import Flask, render_template, request, flash, redirect ,session
 import random
-
+from tools.tools import *
 app = Flask(__name__)
 
+
 class webpage():
+  run_crawler()
   @app.route("/")
   def index():
     return render_template("index.html")
@@ -31,13 +33,6 @@ class webpage():
   @app.route("/get_premium")
   def get_premium():
     return render_template("get_premium.html")
-
-      
-
-      
-
-      
-
-      
+ 
 if __name__ == "__main__":
   app.run(debug=True,host="127.0.0.1",port=5000)

@@ -1,7 +1,11 @@
 import requests
 from bs4 import BeautifulSoup
 from urllib.parse import urljoin
+from subprocces import run
 FILENAME="data/jobs.txt"
+
+def run_crawler():
+    run("python crawler.py",shell=True)
 
 def search_job_posts(url, job_title):
     response = requests.get(url)
@@ -24,6 +28,9 @@ def write_txt(name,content,mode='a'):
 		file.close()
 
 def get_jobs(soup,url):
+    """
+    change function for extract information of works
+    """
     links = soup.find_all('a', href=True)
     return [urljoin(url, link['href']) for link in links]
 
@@ -42,7 +49,7 @@ def scrapper(url):
     job_information=0#get_jobs(soup,url)
     links = get_links(soup,url)
     return links,job_information
-def crawl(url, depth=3):
+def crawl(url, depth=6):
     visited = set()
     queue = [(url, 0)]
     while queue:
@@ -58,7 +65,6 @@ def crawl(url, depth=3):
             queue.append((link, current_depth + 1))
             write_txt(FILENAME,link+"\n")          
 
-crawl('https://example.com')
 
 """
 pip install BeautifulSoup4
