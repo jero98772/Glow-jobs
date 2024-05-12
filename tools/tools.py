@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 from urllib.parse import urljoin
-from subprocces import run
+from subprocess import run
 FILENAME="data/jobs.txt"
 
 def run_crawler():
@@ -27,6 +27,36 @@ def write_txt(name,content,mode='a'):
 		file.write(content)
 		file.close()
 
+
+
+def get_jobs(soup, url):
+    """
+    Extract information of job positions, companies, and salaries from the HTML soup.
+    """
+    job_cards = soup.find_all("article", class_="mg_job_card_mobile_magneto-ui-card-mobile-jobs_18tcb")
+    job_data = []
+
+    for card in job_cards:
+        # Extract job position
+        job_position_element = card.find("h2", class_="mg_job_card_mobile_magneto-ui-card-mobile-jobs--row2_position_18tcb")
+        job_position = job_position_element.text.strip() if job_position_element else None
+
+        # Extract company name
+        company_element = card.find("h3")
+        company = company_element.text.strip() if company_element else None
+
+        # Extract salary
+        salary_element = card.find("p", string=lambda text: "$" in text)
+        salary = salary_element.text.strip() if salary_element else None
+
+        # Append job data to the list
+        job_data.append({
+            "job_position": job_position,
+            "company": company,
+            "salary": salary
+        })
+
+    return job_data
 def get_jobs(soup,url):
     """
     change function for extract information of works
