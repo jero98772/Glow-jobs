@@ -9,6 +9,24 @@ from aiohttp import ClientSession
 from tools.tools import *
 app = Flask(__name__)
 
+class counter():
+    _instances = {}
+    def __new__(cls, maxvalue):
+        if maxvalue not in cls._instances:
+            cls._instances[maxvalue] = super().__new__(cls)
+        return cls._instances[maxvalue]
+
+    def __init__(self, maxvalue):
+        # Initialize only if the instance is newly created
+        if not hasattr(self, 'initialized'):
+            self.start = maxvalue
+            self.maxvalue = maxvalue
+            self.initialized = True
+            self.rnd = random.randint(1, maxvalue)
+    def rnd_value(self):
+      return (self.rnd*self.start)%self.maxvalue
+    def decrement(self,value=1):
+      self.start-=value
 
 class webpage():
   run_crawler()
@@ -27,13 +45,14 @@ class webpage():
     return render_template("blog.html")
   @app.route("/launchapp",methods=['POST','GET'])
   def launchapp():
-    randnum = random.randint(1, 5)
+    c=counter(5)
     if request.method == "POST":
       if request.form['submit_button'] == 'accept':
             pass 
       elif request.form['submit_button'] == 'reject':
             pass 
-    return render_template("launchapp.html", randnum=randnum)
+    c.decrement()
+    return render_template("launchapp.html", randnum=c.rnd_value())
   @app.route("/conctact")
   def conctact():
     return render_template("conctact.html")
